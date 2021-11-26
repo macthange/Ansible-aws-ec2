@@ -1,0 +1,7 @@
+---
+- hosts: ansible_host
+  become: yes
+  roles:
+    - configure_server 
+    
+  

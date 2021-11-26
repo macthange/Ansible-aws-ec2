@@ -1,0 +1,21 @@
+FROM alpine:3.12
+
+ARG TERRAFORM_VERSION=0.14.0
+
+RUN apk --update --no-cache add curl unzip git openssh bash
+RUN curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip --output terraform.zip && \
+    unzip terraform.zip -d terraform && \
+    rm terraform.zip && \
+    mv ./terraform/terraform /usr/bin/terraform && \
+    rm -r ./terraform && \
+    chmod +x /usr/bin/terraform
+
+# Setup Git SSH access, needed when importing module source from git
+RUN mkdir -p ~/.ssh/ && \
+    touch ~/.ssh/id_rsa && \
+    chmod 400 ~/.ssh/id_rsa && \
+    echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
+ADD ./entrypoint.sh /bin/entrypoint.sh
+
+ENTRYPOINT [ "entrypoint.sh" ]

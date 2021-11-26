@@ -1,0 +1,4 @@
+#Handlers appliation restart
+#
+#- name: Restart appliation service
+#  shell: cd /opt/ma_app/bin ; ./my_app restart

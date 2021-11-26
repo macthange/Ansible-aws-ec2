@@ -1,0 +1,65 @@
+---
+
+- name: Create group webapps_group
+  become: yes
+  group:
+    name: "{{ webapps_group_name }}"
+	gid: "{{ webapps_group_gid }}"
+    state: present
+
+- name: Create my_app_user
+  become: yes
+  user:
+    name: "{{ my_app_user_name }}"
+	uid: "{{ my_app_user_id }}"
+    state: present   
+    group: "{{ webapps_group_name }}"
+    
+# password: "{{ my_app_user_password|password_hash('sha512') }}"    
+    
+- name: Install the NGINX 
+  yum:
+    name: nginx
+    state: present
+
+    
+- name: Install python3-devel 
+  yum:
+    name: python3-devel 
+    state: present  
+          
+- name: clone git repo to user home
+  command: '"{{ item }}" chdir=/home/my_app/'
+  with_items:
+    - git clone single-branch -b {{ git_branch )) git@bitbucket.org:my-org/my_app.git"
+    
+# git clone single-branch -b {{ git_name )) git@bitbucket.org:my-org/my_app.git --config core.sshCommand="ssh -i ~/location/to/private_ssh_key"    
+- name: copy my_app source code to opt
+  copy:
+    src: /home/my_app
+    dest: /opt/
+    
+- name: delete my_app drom download path 
+  become: yes
+  shell: /home/my_app
+  
+- name: Running ./configure for my_app
+  command: '"{{ item }}" chdir=/opt/my_app/'
+  with_items:
+    - ./configure
+    
+- name: Running "make" for my_app
+  command: '"{{ item }}" chdir=/opt/my_app/'
+  with_items:
+    - make
+- name: Running "make install" for my_app 
+  command: 'make install chdir=/opt/my_app/'
+  register: result
+
+- name: Restart nginx
+  service: 
+    name: nginx 
+    state: restarted
+    enabled: yes
+  when: result is succeeded	
+	

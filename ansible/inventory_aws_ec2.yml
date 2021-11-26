@@ -1,0 +1,19 @@
+#Defines which plugin to use
+plugin: aws_ec2
+
+#My boto profile on this machine where I run ansible inventory command
+boto_profile: default
+
+#AWS EC2 regions, you can mention any number of regions
+regions:
+  - us-east-1
+
+#Used to filter out EC2 instances based on conditions. Here we are selecting only running instances with tag "name: my_instance_dev" 
+filters:    
+    instance-state-name: running
+    tag:name: my_instance_dev
+keyed_groups:
+  - key: tag:name
+    separator: ""
+compose:
+  ansible_host: private_ip_address

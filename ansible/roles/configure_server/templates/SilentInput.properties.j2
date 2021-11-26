@@ -1,0 +1,32 @@
+# Use the following guidelines when editing this file:
+# * Use this file to install without user interaction. Save the file
+#   with the following name:  SilentInput.properties
+# * Any error condition that leads to failure, such as an invalid
+#   installation directory, generates a log file in the user home
+#   directory. For example: /home/<user name>/silentErrorLog.log
+
+#######
+# Use this file (SilentInput.properties) to install Informatica services without user interaction.
+#     Use this sample properties file to define the parameters for the silent installation.
+#     To upgrade Informatica, use the SilentInput_upgrade.properties or SilentInput_upgrade_NewConfig.properties file.
+# Use the following guidelines when you edit this file:
+#     Back up the file before you modify it.
+#     Any error condition that causes the installation to fail, such as an installation directory that is not valid,
+#     generates a log file in /home/<user name>. For example: /home/informatica/silentErrorLog.log
+#######
+
+# Set ENABLE_USAGE_COLLECTION  to 1 to accept the product usage toolkit end user license agreement.
+# You must set the value as 1 to install app
+# The product usage toolkit end user license agreement is available 
+# As further described in the EULA, your use of the Informatica platform will enable the product usage toolkit
+# to collect certain product usage and failure information. You may disable this feature at any time.
+# For more information on how to disable this feature refer the my_aqpp Administrator Guide.
+
+#ENABLE_USAGE_COLLECTION=1
+
+# The LICENSE_KEY_LOC property represents the absolute path and file name of the license key file.
+#     Set the property if you are installing or upgrading my_aqpp.
+
+#LICENSE_KEY_LOC=/home/license.key
+#LICENSE_KEY_LOC=/home/apps/INSTALLER/my_aqpp/{{ app_version }}/{{ app_lic_key }}
+

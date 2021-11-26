@@ -1,0 +1,16 @@
+---
+###
+#Group
+#
+#webapps_group_name: webapps
+#webapps_group_gid: 570
+#
+####
+##user
+##
+#my_app_user_name: my_app_user
+#my_app_user_password: "{{ user_pass }}"
+#my_app_user_id: 1503
+#app_version: 2.0.1
+#app_lic_key: /opt/my_app/myapp_lic.key
+
