@@ -1,7 +1,7 @@
 FROM amazoncorretto:8
 
-LABEL name="data-access-composite"
-LABEL fullname="data-access-composite"
+LABEL name="data-composite"
+LABEL fullname="data-composite-app"
 LABEL version={{version}}
 
 
@@ -24,8 +24,8 @@ COPY ./docker-entry-point.sh /
 
 RUN chmod 755 /docker-entry-point.sh
 
-COPY ./target /java-app/com/tr/analytics-common/data-access-composite/
+COPY ./target /java-app/com/tr/app_data/composite/
 
-WORKDIR /java-app/com/tr/analytics-common/data-access-composite/
+WORKDIR /java-app/com/tr/dats-common/composite/
 
 CMD /docker-entry-point.sh $Tag && java -javaagent:./aspectj-runtime/spring-instrument.jar -javaagent:./aspectj-runtime/aspectjweaver.jar $JAVA_OPTIONS -Dsp-eventSourceVersion=$Tag -Dserver.port=$LISTEN_PORT -Dmanagement.port=$MGMT_LISTEN_PORT -Dapt-config-path=./config -jar $JAVA_APP_JAR
