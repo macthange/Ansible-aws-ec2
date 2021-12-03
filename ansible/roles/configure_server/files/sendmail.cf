@@ -89,13 +89,13 @@ Fw/etc/mail/local-host-names
 # my official domain name
 # ... define this only if sendmail cannot automatically determine your domain
 #Dj$w.Foo.COM
-Dj aviva.co.uk
+Dj abc.co.uk
 # host/domain names ending with a token in class P are canonical
 CP.
 
 # "Smart" relay host (may be null)
 #DS
-DS015-SMTP-OUT.AVIVA.COM
+DS015-SMTP-OUT.abc.COM
 
 
 # operators that cannot be in local usernames (i.e., network indicators)
